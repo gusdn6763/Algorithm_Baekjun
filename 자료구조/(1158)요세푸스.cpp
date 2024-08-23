@@ -2,27 +2,27 @@
 
 using namespace std;
 
-typedef struct ListNode 
+typedef struct ListNode
 {
 	int data;
 	bool check = false;
 	struct ListNode* next;
 } ListNode;
 
-void InsertAtEnd(ListNode** head, int data) 
+void InsertAtEnd(ListNode** head, int data)
 {
 	ListNode* inserted = new ListNode;
 	inserted->data = data;
 	if (*head == NULL)
-    {
+	{
 		*head = inserted;
 		inserted->next = *head;
 	}
 	else
-    {
+	{
 		ListNode* tail = *head;
 		while (tail->next != *head)
-         {
+		{
 			tail = tail->next;
 		}
 		tail->next = inserted;
@@ -37,7 +37,7 @@ int main()
 
 	int people, count, size = 0;
 	ListNode* head = NULL;
-	ListNode* currentNode;
+	ListNode* currentNode = NULL;
 
 	cin >> people;
 	cin >> count;
@@ -46,27 +46,21 @@ int main()
 		InsertAtEnd(&head, i + 1);
 		size++;
 	}
-	currentNode = head;
-	while (size != 0)
+
+	cout << "<";
+	do 
 	{
+		currentNode = head;
 		for (int i = 0; i < count; i++)
 		{
-			if ((people == size && i == 0))
+			currentNode = head;
+			head = currentNode->next;
+			if (currentNode->check == true)
 			{
-				i++;
-				cout << "<";
-			}
-			if (count != 1 || people != size)
-			{
-				currentNode = head->next;
-				head = currentNode;
-				if (currentNode->check == true)
+				while (currentNode->check != false)
 				{
-					while (currentNode->check != false)
-					{
-						currentNode = head->next;
-						head = currentNode;
-					}
+					currentNode = head;
+					head = currentNode->next;
 				}
 			}
 		}
@@ -77,7 +71,7 @@ int main()
 		{
 			cout << ", ";
 		}
-	}
+	} while (size != 0);
 	cout << ">";
 }
 

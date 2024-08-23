@@ -37,6 +37,7 @@ int main() {
 	int tree_count;
 	cin >> tree_count;
 
+	//연결된 트리 번호, 거리값
 	vector<pair<int, int>> *tree = new vector<pair<int, int>>[tree_count + 1];
 
 	bool check[100001] = { false };
